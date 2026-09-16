@@ -24,9 +24,16 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
         ]);
 
+        User::factory()->create([
+            'name' => 'Cliente',
+            'email' => 'cliente@lojaretrogame.com',
+            'password' => bcrypt('123654'),
+            'role' => 'cliente',
+        ]);
+
         $this->call([
-        CategoriaSeeder::class,
-        ProdutoSeeder::class,
+            CategoriaSeeder::class,
+            ProdutoSeeder::class,
         ]);
     }
 }
