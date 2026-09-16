@@ -95,6 +95,17 @@
                 </div>
             @endif
 
+            @can('delete', $sugestao)
+                <form method="POST" action="{{ route('sugestoes.destroy', $sugestao) }}"
+                      onsubmit="return confirm('Tem certeza que deseja excluir esta sugestão?');" class="mt-6">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 text-sm">
+                        Excluir sugestão
+                    </button>
+                </form>
+            @endcan
+
             <div class="mt-6">
                 <a href="{{ route('sugestoes.index') }}" class="text-gray-700 hover:underline text-sm">
                     &larr; Voltar para {{ auth()->user()->role === 'admin' ? 'as sugestões' : 'minhas sugestões' }}
