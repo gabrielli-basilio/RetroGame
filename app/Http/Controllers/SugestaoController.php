@@ -81,4 +81,15 @@ class SugestaoController extends Controller
             ->route('sugestoes.show', $sugestao)
             ->with('success', 'Sugestão atualizada com sucesso.');
     }
+
+    public function destroy(Sugestao $sugestao)
+    {
+        $this->authorize('delete', $sugestao);
+
+        $sugestao->delete();
+
+        return redirect()
+            ->route('sugestoes.index')
+            ->with('success', 'Sugestão removida com sucesso.');
+    }
 }
