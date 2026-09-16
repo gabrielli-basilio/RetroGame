@@ -12,8 +12,6 @@ Route::get('/', [
 ])->name('home');
 
 Route::get('/produtos', [ProdutoController::class, 'index'])->name('produtos.index');
-Route::get('/produtos/{produto}', [ProdutoController::class, 'show'])->name('produtos.show');
-Route::get('/categorias/{categoria}', [CategoriaController::class, 'show'])->name('categorias.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -25,7 +23,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
 Route::middleware(['auth', 'admin'])->group(function () {
     // rotas administrativas
 
@@ -35,5 +32,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('categorias', CategoriaController::class)->except(['show']);
     Route::resource('produtos', ProdutoController::class)->except(['index', 'show']);
 });
+
+Route::get('/produtos/{produto}', [ProdutoController::class, 'show'])->name('produtos.show');
+Route::get('/categorias/{categoria}', [CategoriaController::class, 'show'])->name('categorias.show');
 
 require __DIR__.'/auth.php';
