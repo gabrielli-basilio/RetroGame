@@ -7,27 +7,31 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Produto extends Model
+class Pedido extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nome', 'descricao', 'preco', 'estoque', 'imagem', 'categoria_id'];
+    protected $fillable = ['user_id', 'status', 'total'];
 
     protected function casts(): array
     {
         return [
-            'preco' => 'decimal:2',
-            'estoque' => 'integer',
+            'total' => 'decimal:2',
         ];
     }
 
-    public function categoria(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Categoria::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function itensPedido(): HasMany
+    public function itens(): HasMany
     {
         return $this->hasMany(ItemPedido::class);
+    }
+
+    public function calcularTotal(): float
+    {
+        return $this->itens->sum(fn (ItemPedido $item) => $item->quantidade * $item->preco_unitario);
     }
 }
