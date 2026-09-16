@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -22,13 +23,20 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos.index');
-    Route::get('/pedidos/novo', [PedidoController::class, 'create'])->name('pedidos.create');
-    Route::post('/pedidos', [PedidoController::class, 'store'])->name('pedidos.store');
-    Route::get('/pedidos/{pedido}', [PedidoController::class, 'show'])->name('pedidos.show');
+    Route::get('/sugestoes', [SugestaoController::class, 'index'])->name('sugestoes.index');
+    Route::get('/sugestoes/nova', [SugestaoController::class, 'create'])->name('sugestoes.create');
+    Route::post('/sugestoes', [SugestaoController::class, 'store'])->name('sugestoes.store');
+    Route::get('/sugestoes/{sugestao}', [SugestaoController::class, 'show'])->name('sugestoes.show');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
+    // rotas administrativas já existentes...
+
+    Route::get('/produtos/{produto}', [ProdutoController::class, 'show'])->name('produtos.show');
+    Route::get('/categorias/{categoria}', [CategoriaController::class, 'show'])->name('categorias.show');
+
+    Route::put('/sugestoes/{sugestao}', [SugestaoController::class, 'update'])->name('sugestoes.update');
+});
     // rotas administrativas
 
     Route::get('/produtos', [ProdutoController::class, 'index'])->name('produtos.index');
@@ -41,6 +49,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/produtos/{produto}', [ProdutoController::class, 'show'])->name('produtos.show');
     Route::get('/categorias/{categoria}', [CategoriaController::class, 'show'])->name('categorias.show');
-});
+
 
 require __DIR__.'/auth.php';
