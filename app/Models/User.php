@@ -26,8 +26,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function pedidos(): HasMany
+    public function sugestoes(): HasMany
     {
-        return $this->hasMany(Pedido::class);
+        return $this->hasMany(Sugestao::class);
     }
 }
