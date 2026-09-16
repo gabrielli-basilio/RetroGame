@@ -34,9 +34,7 @@
                 @endforeach
             </div>
 
-            @if (method_exists($produtos, 'links'))
-                <div class="mt-6">{{ $produtos->links() }}</div>
-            @endif
+            {{ $produtos->links() }}
         </div>
     </div>
 </x-app-layout>
