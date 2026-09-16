@@ -6,7 +6,9 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        <span style="font-family: 'Press Start 2P', sans-serif;" class="text-sm text-gray-800">
+                            retro<span class="text-green-600">GAME</span>
+                        </span>
                     </a>
                 </div>
 
