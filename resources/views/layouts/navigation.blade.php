@@ -15,6 +15,13 @@
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Home') }}
                     </x-nav-link>
+                    @auth
+                    @if(Auth::user()->role === 'admin')
+                        <x-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.*')">
+                            {{ __('Usuários') }}
+                        </x-nav-link>
+                    @endif
+                    @endauth
                 </div>
             </div>
 
@@ -74,6 +81,14 @@
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Home') }}
             </x-responsive-nav-link>
+
+            @auth
+            @if(Auth::user()->role === 'admin')
+                <x-responsive-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.*')">
+                    {{ __('Usuários') }}
+                </x-responsive-nav-link>
+            @endif
+            @endauth
         </div>
 
         <!-- Responsive Settings Options -->
