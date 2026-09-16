@@ -5,6 +5,21 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            
+            <!-- Filtro por Categoria -->
+            <form method="GET" class="mb-6 flex gap-3 items-center bg-gray-800 p-4 rounded-lg border border-gray-700">
+                <label for="categoria_id" class="text-sm text-gray-300">Filtrar por categoria:</label>
+                <select name="categoria_id" id="categoria_id" onchange="this.form.submit()"
+                        class="bg-gray-900 text-gray-200 border border-gray-700 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                    <option value="">Todas</option>
+                    @foreach ($categorias as $categoria)
+                        <option value="{{ $categoria->id }}" @selected(request('categoria_id') == $categoria->id)>
+                            {{ $categoria->nome }}
+                        </option>
+                    @endforeach
+                </select>
+            </form>
+
             @php
                 $cores = [
                     'Consoles'                  => ['border' => 'border-green-500',  'bg' => 'bg-green-900/30',  'badge' => 'bg-green-900 text-green-300'],
@@ -16,7 +31,7 @@
             @endphp
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                @foreach ($produtos as $produto)
+                @forelse ($produtos as $produto)
                     @php
                         $cor = $cores[$produto->categoria->nome] ?? ['border' => 'border-orange-500', 'bg' => 'bg-orange-900/30', 'badge' => 'bg-orange-900 text-orange-300'];
                     @endphp
@@ -34,10 +49,14 @@
                             </span>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <p class="text-gray-400 col-span-full text-center py-8">Nenhum produto encontrado.</p>
+                @endforelse
             </div>
 
-            {{ $produtos->links() }}
+            <div class="mt-6">
+                {{ $produtos->links() }}
+            </div>
         </div>
     </div>
 </x-app-layout>
