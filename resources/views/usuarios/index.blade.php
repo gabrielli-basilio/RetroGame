@@ -24,6 +24,12 @@
                             <td>{{ $usuario->role }}</td>
                             <td>
                                 <a href="{{ route('usuarios.edit', $usuario) }}">Editar</a>
+
+                                <form method="POST" action="{{ route('usuarios.destroy', $usuario) }}" style="display:inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" onclick="return confirm('Excluir este usuário?')">Excluir</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
