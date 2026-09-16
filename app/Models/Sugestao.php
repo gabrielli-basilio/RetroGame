@@ -10,6 +10,8 @@ class Sugestao extends Model
 {
     use HasFactory;
 
+    protected $table = 'sugestoes';
+
     protected $fillable = [
         'user_id',
         'produto_id',
