@@ -65,10 +65,14 @@
                             </form>
                         </x-slot>
                 </x-dropdown>
-            @else
-                <a href="{{ route('login') }}" class="text-sm text-gray-200 hover:text-white">{{ __('Entrar') }}</a>
-            @endauth
-        </div>
+
+                @else
+                    <div class="flex items-center gap-4">
+                        <a href="{{ route('login') }}" class="text-sm text-gray-200 hover:text-white">{{ __('Entrar') }}</a>
+                        <a href="{{ route('register') }}" class="text-sm text-gray-200 hover:text-white">{{ __('Cadastrar') }}</a>
+                    </div>
+                @endauth
+            </div>
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
@@ -95,7 +99,7 @@
             <x-responsive-nav-link :href="route('produtos.index')" :active="request()->routeIs('produtos.*')" class="text-gray-200">
                 {{ __('Produtos') }}
             </x-responsive-nav-link>
-            
+
             <x-responsive-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.*')" class="text-gray-200">
                     {{ __('Usuários') }}
                 </x-responsive-nav-link>
@@ -129,6 +133,10 @@
                 <div class="mt-3 space-y-1">
                     <x-responsive-nav-link :href="route('login')">
                         {{ __('Entrar') }}
+                    </x-responsive-nav-link>
+                    
+                    <x-responsive-nav-link :href="route('register')">
+                        {{ __('Cadastrar') }}
                     </x-responsive-nav-link>
                 </div>
             @endauth
