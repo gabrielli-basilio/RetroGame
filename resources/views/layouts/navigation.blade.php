@@ -18,7 +18,12 @@
                         {{ __('Início') }}
                     </x-nav-link>
                     @auth
+
                     @if(Auth::user()->role === 'admin')
+                        <x-nav-link :href="route('produtos.index')" :active="request()->routeIs('produtos.*')" class="text-gray-200">
+                            {{ __('Produtos') }}
+                        </x-nav-link>
+
                         <x-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.*')" class="text-gray-200">
                             {{ __('Usuários') }}
                         </x-nav-link>
@@ -86,7 +91,12 @@
 
             @auth
             @if(Auth::user()->role === 'admin')
-                <x-responsive-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.*')" class="text-gray-200">
+                
+            <x-responsive-nav-link :href="route('produtos.index')" :active="request()->routeIs('produtos.*')" class="text-gray-200">
+                {{ __('Produtos') }}
+            </x-responsive-nav-link>
+            
+            <x-responsive-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.*')" class="text-gray-200">
                     {{ __('Usuários') }}
                 </x-responsive-nav-link>
             @endif
