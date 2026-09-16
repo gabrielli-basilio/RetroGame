@@ -8,6 +8,11 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('home');
+        $produtos = collect([
+            (object) ['nome' => 'Super Nintendo', 'preco' => 350, 'categoria' => (object)['nome' => 'Console']],
+            (object) ['nome' => 'Catan', 'preco' => 180, 'categoria' => (object)['nome' => 'Jogo de tabuleiro']],
+        ]);
+
+        return view('home', compact('produtos'));
     }
 }
