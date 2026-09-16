@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/sugestoes/nova', [SugestaoController::class, 'create'])->name('sugestoes.create');
     Route::post('/sugestoes', [SugestaoController::class, 'store'])->name('sugestoes.store');
     Route::get('/sugestoes/{sugestao}', [SugestaoController::class, 'show'])->name('sugestoes.show');
+    Route::delete('/sugestoes/{sugestao}', [SugestaoController::class, 'destroy'])->name('sugestoes.destroy');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
