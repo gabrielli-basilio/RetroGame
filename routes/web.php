@@ -1,18 +1,14 @@
 <?php
 
-
-use App\Http\Controllers\PedidoController;
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SugestaoController;
+use App\Http\Controllers\UsuarioController;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', [
-    HomeController::class, 'index'
-])->name('home');
-
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -30,25 +26,16 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    // rotas administrativas já existentes...
-
-    Route::get('/produtos/{produto}', [ProdutoController::class, 'show'])->name('produtos.show');
-    Route::get('/categorias/{categoria}', [CategoriaController::class, 'show'])->name('categorias.show');
-
     Route::put('/sugestoes/{sugestao}', [SugestaoController::class, 'update'])->name('sugestoes.update');
-});
-    // rotas administrativas
 
     Route::get('/produtos', [ProdutoController::class, 'index'])->name('produtos.index');
-
-    Route::resource('usuarios', UsuarioController::class)
-    ->except(['create', 'store', 'show']);
-
-    Route::resource('categorias', CategoriaController::class)->except(['show']);
+    Route::get('/produtos/{produto}', [ProdutoController::class, 'show'])->name('produtos.show');
     Route::resource('produtos', ProdutoController::class)->except(['index', 'show']);
 
-    Route::get('/produtos/{produto}', [ProdutoController::class, 'show'])->name('produtos.show');
     Route::get('/categorias/{categoria}', [CategoriaController::class, 'show'])->name('categorias.show');
+    Route::resource('categorias', CategoriaController::class)->except(['show']);
 
+    Route::resource('usuarios', UsuarioController::class)->except(['create', 'store', 'show']);
+});
 
 require __DIR__.'/auth.php';
