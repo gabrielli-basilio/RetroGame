@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UsuarioController;
 
 Route::get('/', [
     HomeController::class, 'index'
@@ -22,6 +23,9 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
     // rotas administrativas
+
+    Route::resource('usuarios', UsuarioController::class)
+    ->except(['create', 'store', 'show']);
 });
 
 require __DIR__.'/auth.php';
