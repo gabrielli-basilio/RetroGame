@@ -26,8 +26,8 @@ class Produto extends Model
         return $this->belongsTo(Categoria::class);
     }
 
-    public function itensPedido(): HasMany
+    public function sugestoes(): HasMany
     {
-        return $this->hasMany(ItemPedido::class);
+        return $this->hasMany(Sugestao::class);
     }
 }
