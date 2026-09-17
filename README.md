@@ -21,18 +21,18 @@ Copie o `.env.example` para `.env` e configure com os dados do seu banco Postgre
 
 Rode os comandos abaixo no terminal, na raiz do projeto:
 
-\`\`\`bash
+```bash
 composer install
 npm install
 php artisan key:generate
 php artisan migrate:fresh --seed
-\`\`\`
+```
 
 ## Execução
-\`\`\`bash
+```bash
 npm run dev
 php artisan serve
-\`\`\`
+```
 
 ## Usuários para teste
 
